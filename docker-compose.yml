@@ -1,0 +1,29 @@
+# GestAuto — environnement complet : MongoDB + API/passerelle + front
+# Lancement : docker compose up -d --build   puis   docker compose exec server npm run seed
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes: [mongo-data:/data/db]
+    ports: ["27017:27017"]
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    env_file: ./server/.env
+    environment:
+      MONGO_URI: mongodb://mongo:27017/gestauto
+      NODE_ENV: production
+    depends_on: [mongo]
+    ports:
+      - "3000:3000"   # API REST + Socket.IO
+      - "5027:5027"   # TCP Teltonika (à ouvrir sur le pare-feu / NAT)
+
+  client:
+    build: ./client
+    restart: unless-stopped
+    depends_on: [server]
+    ports: ["8080:80"]
+
+volumes:
+  mongo-data:

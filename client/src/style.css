@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+}
+
+html, body, #app { height: 100%; }
+
+/* Marqueurs véhicules Leaflet */
+.vehicle-marker { background: transparent; border: none; }
+.vehicle-marker .pin {
+  width: 30px; height: 30px; border-radius: 9999px; border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / .35); display: flex; align-items: center; justify-content: center;
+}
+.vehicle-marker .arrow { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid #fff; }
+.vehicle-marker .label {
+  position: absolute; top: 32px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font: 600 11px/1.2 system-ui, sans-serif; background: #fff; padding: 1px 5px; border-radius: 4px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / .2);
+}
+.leaflet-container { font-family: inherit; z-index: 0; }
